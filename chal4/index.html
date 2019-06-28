@@ -1,0 +1,88 @@
+<!-- 
+    Description: Pure Javascript - Fix client issue
+    
+    Problems: 
+        #1 When I type "ar" ~ "Ar" is not showing in the result.
+        #2 When I type "d" ~ "Dodong" and "Dimi" is not showing in the result.
+
+    Rule#1: Result limit is 5
+    Rule#2: Users default data cannot be changed but can be alter/manipulate through code/algo
+
+    Bonus: Add the result in the search box once clicked.
+ -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>Challenge 4 - Search</title>
+     <style>
+         #result, input{ padding:10px; width:40%; display:block;  margin:0; margin:0 auto; outline:none; list-style:none; border:1px solid #ddd; }
+         #result{ display:none; font-family: "Courier"; background: #ddd; font-size: 12px; } #result li{ padding:10px; width:100%; box-sizing: border-box; } #result li:hover{ background:#f1f1f1}
+         li.noresult{ color:crimson; }
+     </style>
+ </head>
+ <body>
+     <input type="text" placeholder="I'm looking for..." onkeyup="Search(this)" onblur="Clear()">
+     <ul id="result"></ul>
+ 
+     <script>
+         //<ul [id]> to result variable
+         let result = document.getElementById('result');
+         
+         //Users data
+         let Users = [
+             { name: "Nodani", age:15 },         { name: "Nodali", age:15 },
+             { name: "Nodam", age:15 },          { name: "Nodalito", age:15 },
+             { name: "Noldi", age:15 },          { name: "Nodale", age:15 },
+             { name: "Kaylag", age:15 },         { name: "Kaymi", age:15 },
+             { name: "Kaye", age:15 },           { name: "Kayne", age:15 },
+             { name: "Aguinaldo", age:15 },      { name: "Agapito", age:15 },
+             { name: "Aarni", age:15 },          { name: "Jack", age:15 },
+             { name: "Alimango", age:15 },       { name: "Ampatuan", age:15 },
+             { name: "Aguinaldo", age:15 },      { name: "Maria", age:15 },
+             { name: "Gustavo", age:15 },        { name: "Tarantula", age:15 },
+             { name: "Bingkay", age:15 },        { name: "Tarantado", age:15 },
+             { name: "Jigaon", age:15 },         { name: "Cenyurito", age:15 },
+             { name: "Aaron", age:15 },          { name: "Senyorita", age:15 },
+             { name: "Arinola", age:15 },        { name: "Mandurugas", age:15 },
+             { name: "Ar", age:15 },        { name: "Sen", age:15 },
+             { name: "Arnold", age:15 },         { name: "Sendy", age:15 },
+             { name: "Arlin", age:15 },          { name: "Senene", age:15 },
+             { name: "Dodong", age:15 },          { name: "Dimi", age:15 },
+             { name: "Kay", age:15 },            { name: "Kaylie", age:15 },
+             { name: "Arli", age:15 },           { name: "Se", age:15 },
+             { name: "Nodaan", age:15 },         { name: "Noda", age:15 },
+             { name: "Noldan", age:15 },         { name: "Nodal", age:15 },
+             { name: "Nod", age:15 },            { name: "Nodi", age:15 },
+         ];
+ 
+         let Search = (q) => {
+ 
+             //Filters users data by input -- user.name.toLowerCase().includes(q.value.trim().toLowerCase()) *will return if input match with Users.name
+             let Result = Users.filter( user => user.name.toLowerCase().includes(q.value.trim().toLowerCase()) );
+ 
+             //show suggest box / result
+             result.innerHTML = "";
+             result.style.display = "block";
+             
+             Result
+                 .slice(0, 5)
+                 .map( user => {
+                     result.innerHTML += `<li>${user.name}</li>`;
+                 });
+ 
+             //if result array is empty - display message
+             !Result.length && (result.innerHTML = `<li class="noresult">No result found!</li>`);
+         }
+ 
+         //hide suggest box / result
+         let Clear = () => {
+             result.innerHTML = "";
+             result.style.display = "none";
+         }
+ 
+     </script>
+ </body>
+ </html>
