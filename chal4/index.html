@@ -61,15 +61,28 @@
          let Search = (q) => {
  
              //Filters users data by input -- user.name.toLowerCase().includes(q.value.trim().toLowerCase()) *will return if input match with Users.name
-             let Result = Users.filter( user => user.name.toLowerCase().includes(q.value.trim().toLowerCase()) );
+             let Result = Users.filter( user => user.name.toLowerCase().includes(q.value.trim().toLowerCase()));
+            
+             
+            // let Result = Users.filter( user => {
+            //     if(user.name[0].toLowerCase().includes(q.value.trim().toLowerCase())){
+            //         return user.name
+            //     }else if(user.name.toLowerCase().includes(q.value.trim().toLowerCase())){
+            //         return user.name
+            //     }
+                
+            // })
+
+            
  
              //show suggest box / result
              result.innerHTML = "";
              result.style.display = "block";
              
              Result
-                 .slice(0, 5)
-                 .map( user => {
+             
+                .slice(0, 5)
+                .map( user => {
                      result.innerHTML += `<li>${user.name}</li>`;
                  });
  
